@@ -9,17 +9,16 @@ daily weekday report of @arkinvest ETF activity + data collection
 
 # Current suggested process flow as follows:
 From command-line:
-1. Run 'save_temp_dfs()' 
-2. Run 'import_status()':
-      - Saves current csv from ARKInvest site for each of the 6 ETFs as 'temp.csv'
+1. Run 'import_status()':
+      - Saves current csv from ARKInvest site for each of the 6 ETFs as 'temp.csv' in respective data subdirectories.
       - Identifies whether the temp file is new, or a duplicate of your previous day's run. *ARK appears to upload new csv's at 7PM EST.
       - If step 2 does not identify a new import, the program will exit().
-3. Run 'allocation()': 
+2. Run 'allocation()': 
       - Compares ticker presence within the two most recent confirmed files. 
-5. Run 'changes(significance)':
+3. Run 'changes(significance)':
       - Identifies significant increases or decreases in shares within the two most recent confirmed files. Significance parameter = float.
       - Example: changes(6.0) -> Within each ETF, return shares increase >= 6.0% AND return shares decrease <= -6.0%
-6. Run 'all_dfs()' if you would like to access each of the ETF's most recent day-over-day report. The function will return a list of pandas dataframes. *See below:
+4. Run 'all_dfs()' if you would like to access each of the ETF's most recent day-over-day report. The function will return a list of pandas dataframes. *See below:
       - DoD_reports = all_dfs()
       - arkk = DoD_reports[0]
       - arkw = DoD_reports[1]
