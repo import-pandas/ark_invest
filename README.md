@@ -10,7 +10,7 @@ daily weekday report of @arkinvest ETF activity + data collection
 # Current suggested process flow as follows:
 From command-line:
 1. Run 'import_status()':
-      - Saves current csv from ARKInvest site for each of the 6 ETFs as 'temp.csv'
+      - Saves current csv from ARKInvest site for each of the 6 ETFs as 'temp.csv' in respective data subdirectories.
       - Identifies whether the temp file is new, or a duplicate of your previous day's run. *ARK appears to upload new csv's at 7PM EST.
       - If step 2 does not identify a new import, the program will exit().
 2. Run 'allocation()': 
