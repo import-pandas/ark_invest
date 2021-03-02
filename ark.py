@@ -272,12 +272,12 @@ def change_summary(highlights, etf_name):
         return prefix + 'No significant changes'
 
 def change_highlight_output(change_report, change_threshold):
-    innovation = change_summary(get_highlights(change_report[0], change_threshold), 'Innovation ETF($ARKK)')
-    internet = change_summary(get_highlights(change_report[1], change_threshold), 'Internet ETF($ARKW)')
-    genomic = change_summary(get_highlights(change_report[2], change_threshold), 'Genomic ETF($ARKG)')
-    autonomous = change_summary(get_highlights(change_report[3], change_threshold), 'Autonomous ETF($ARKQ)')
-    fintech = change_summary(get_highlights(change_report[4], change_threshold), 'Fintech ETF($ARKF)')
-    _3d = change_summary(get_highlights(change_report[5], change_threshold), '3D ETF($PRNT)')
+    innovation = change_summary(get_highlights(change_report[0], change_threshold), 'Innovation ETF( $ARKK )')
+    internet = change_summary(get_highlights(change_report[1], change_threshold), 'Internet ETF( $ARKW )')
+    genomic = change_summary(get_highlights(change_report[2], change_threshold), 'Genomic ETF( $ARKG )')
+    autonomous = change_summary(get_highlights(change_report[3], change_threshold), 'Autonomous ETF( $ARKQ )')
+    fintech = change_summary(get_highlights(change_report[4], change_threshold), 'Fintech ETF( $ARKF )')
+    _3d = change_summary(get_highlights(change_report[5], change_threshold), '3D ETF( $PRNT )')
 
     output = [innovation, internet, genomic, autonomous, fintech, _3d]
 
