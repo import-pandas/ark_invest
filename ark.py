@@ -129,13 +129,13 @@ def allocation_check(previous_company_dict, current_company_dict):
         if x in current_company_dict:
             pass
         else:
-            output += (f'>>> ${y} was REMOVED\n')
+            output += (f'>>> ${y} was REMOVED')
 
     for x, y in current_company_dict.items():
         if x in previous_company_dict:
             pass
         else:
-            output += (f'>>> ${y} was ADDED\n')
+            output += (f'>>> ${y} was ADDED')
 
     return output
 
