@@ -129,13 +129,13 @@ def allocation_check(previous_company_dict, current_company_dict):
         if x in current_company_dict:
             pass
         else:
-            output += (f'${y} was REMOVED\n')
+            output += (f'>>> ${y} was REMOVED\n')
 
     for x, y in current_company_dict.items():
         if x in previous_company_dict:
             pass
         else:
-            output += (f'${y} was ADDED\n')
+            output += (f'>>> ${y} was ADDED\n')
 
     return output
 
@@ -150,7 +150,7 @@ def compare_files(queue):
         curr_company_dict = dict(zip(df_current.company, df_current.ticker))
         prev_company_dict = dict(zip(df_previous.company, df_previous.ticker))
         if sorted(curr_company_dict) == sorted(prev_company_dict):
-            output.append(f'{x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is EQUAL\n')
+            output.append(f'{x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is EQUAL')
         else:
             output.append(f'{x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is DIFFERENT!')
             output.append(allocation_check(prev_company_dict, curr_company_dict))
