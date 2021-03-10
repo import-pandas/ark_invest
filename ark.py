@@ -1,6 +1,7 @@
 import requests
 import io
 import pandas as pd
+import numpy as np
 from datetime import datetime as dt
 from os import listdir
 from os.path import isfile, join
@@ -129,12 +130,16 @@ def allocation_check(previous_company_dict, current_company_dict):
     for x, y in previous_company_dict.items():
         if x in current_company_dict:
             pass
+        elif y in [np.nan, 'nan']:
+            output += (f'>>> ${x} was REMOVED')
         else:
             output += (f'>>> ${y} was REMOVED')
 
     for x, y in current_company_dict.items():
         if x in previous_company_dict:
             pass
+        elif y in [np.nan, 'nan']:
+            output += (f'>>> ${x} was ADDED')
         else:
             output += (f'>>> ${y} was ADDED')
 
