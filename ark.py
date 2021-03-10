@@ -156,9 +156,9 @@ def compare_files(queue):
         curr_company_dict = dict(zip(df_current.company, df_current.ticker))
         prev_company_dict = dict(zip(df_previous.company, df_previous.ticker))
         if sorted(curr_company_dict) == sorted(prev_company_dict):
-            output.append(f'{x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is EQUAL')
+            output.append(f'@ARKInvest {x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is EQUAL')
         else:
-            output.append(f'{x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is DIFFERENT!')
+            output.append(f'@ARKInvest {x.split("/")[1].upper()} ETF( ${fund} ): current allocation and previous allocation is DIFFERENT!')
             output.append(allocation_check(prev_company_dict, curr_company_dict))
 
     return output
