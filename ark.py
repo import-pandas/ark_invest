@@ -22,7 +22,8 @@ def get_all_paths():
 
 #convert csv url to df
 def url_to_temp(target_url):
-    url_data = requests.get(target_url).content
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    url_data = requests.get(target_url, headers=headers).content
     df = pd.read_csv(io.StringIO(url_data.decode('utf-8')))
     #ark files have two blank lines followed by a line with string. remove these
     df.drop(df.tail(3).index, inplace=True)
