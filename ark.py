@@ -124,6 +124,15 @@ def import_report(directory_list):
         print('\nNew files detected and saved. Proceeding to analysis...')
         return queue
 
+#get most recent file for each directory:
+def get_recent_import_date():
+    dates = []
+    for x in get_all_paths():
+        date = sort_directory(x)[1].split('.')[0]
+        dates.append(date)
+
+    return dates
+
 #check which companies have been added or removed for single etf
 def allocation_check(previous_company_dict, current_company_dict):
     output = ''
@@ -205,13 +214,13 @@ def create_df_list(full_file_list):
     return out
 
 #for each company calculate changes in holdings by taking the most recent 2 reports
-def get_gains(df_in):
+def get_gains(df_in, max_dt):
     combine = []
 
     for company in df_in.company.unique().tolist():
         df = df_in[df_in.company == company].copy()
         df['date'] = pd.to_datetime(df['date'])
-        if df.date.astype(str).max() == sort_directory('data/innovation')[1].split('.')[0]:
+        if df.date.astype(str).max() == max_dt:
             df = df.sort_values(by='date').tail(2).copy()
             df['shares_change(%)'] = df['shares'].pct_change()
             df['shares_change(%)'] = df['shares_change(%)'] * 100
@@ -227,13 +236,14 @@ def get_gains(df_in):
 #needs to handle partial file ok to import!!!
 def change_report(queue):
     df_list = create_df_list(get_full_files(queue))
+    max_dt_list = get_recent_import_date()
 
-    innovation = get_gains(df_list[0])
-    internet = get_gains(df_list[1])
-    genomic = get_gains(df_list[2])
-    autonomous = get_gains(df_list[3])
-    fintech = get_gains(df_list[4])
-    _3d = get_gains(df_list[5])
+    innovation = get_gains(df_list[0], max_dt_list[0])
+    internet = get_gains(df_list[1], max_dt_list[1])
+    genomic = get_gains(df_list[2], max_dt_list[2])
+    autonomous = get_gains(df_list[3], max_dt_list[3])
+    fintech = get_gains(df_list[4], max_dt_list[4])
+    _3d = get_gains(df_list[5], max_dt_list[5])
 
     return innovation, internet, genomic, autonomous, fintech, _3d
 
