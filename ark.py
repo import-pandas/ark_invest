@@ -211,7 +211,7 @@ def get_gains(df_in):
     for company in df_in.company.unique().tolist():
         df = df_in[df_in.company == company].copy()
         df['date'] = pd.to_datetime(df['date'])
-        if df.date.astype(str).max() == dt.today().strftime("%Y-%m-%d"):
+        if df.date.astype(str).max() == sort_directory('data/innovation')[1].split('.')[0]:
             df = df.sort_values(by='date').tail(2).copy()
             df['shares_change(%)'] = df['shares'].pct_change()
             df['shares_change(%)'] = df['shares_change(%)'] * 100
