@@ -209,11 +209,16 @@ def get_gains(df_in):
     combine = []
 
     for company in df_in.company.unique().tolist():
-        df = df_in[df_in.company == company].sort_values(by='date').tail(2).copy()
-        df['shares_change(%)'] = df['shares'].pct_change()
-        df['shares_change(%)'] = df['shares_change(%)'] * 100
-        df['weight_change(%)'] = df['weight(%)'].diff()
-        combine.append(df)
+        df = df_in[df_in.company == company].copy()
+        df['date'] = pd.to_datetime(df['date'])
+        if df.date.astype(str).max() == dt.today().strftime("%Y-%m-%d"):
+            df = df.sort_values(by='date').tail(2).copy()
+            df['shares_change(%)'] = df['shares'].pct_change()
+            df['shares_change(%)'] = df['shares_change(%)'] * 100
+            df['weight_change(%)'] = df['weight(%)'].diff()
+            combine.append(df)
+        else:
+            pass
 
     out = pd.concat(combine, ignore_index=True, axis=0)
 
